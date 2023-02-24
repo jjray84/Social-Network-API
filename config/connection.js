@@ -1,8 +1,8 @@
 const { connect, connection } = require('mongoose');
 
-connect('mongodv:localhost/developersApplications', {
+connect('mongodb:localhost/developersApplications', {
     useNewUrlParser: true,
-    useInifiedTopology: true,
+    useUnifiedTopology: true,
 });
 
 module.exports = connection;
