@@ -1,6 +1,8 @@
-const User = require('./models/User');
+const router = require('express').Router();
+const Thought = require('../../models/Thought');
+const User = require('../../models/User');
 
-app.get('/api/users', (req, res) => {
+router.get('/', (req, res) => {
   User.find({})
     .populate('thoughts')
     .populate('friends')
@@ -14,7 +16,7 @@ app.get('/api/users', (req, res) => {
     });
 });
 
-app.post('/api/users', (req, res) => {
+router.post('/api/users', (req, res) => {
   const { username, email } = req.body;
   const user = new User({ username, email });
 
@@ -27,3 +29,5 @@ app.post('/api/users', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+module.exports = router;

@@ -1,6 +1,8 @@
-const Thought = require('./models/Thought');
+const router = require('express').Router();
+const Thought = require('../../models/Thought');
+const User = require('../../models/User');
 
-app.get('/api/thoughts', (req, res) => {
+router.get('/api/thoughts', (req, res) => {
   Thought.find({})
     .populate('reactions')
     .select('-__v')
@@ -13,7 +15,7 @@ app.get('/api/thoughts', (req, res) => {
     });
 });
 
-app.post('/api/thoughts', (req, res) => {
+router.post('/api/thoughts', (req, res) => {
   const { thoughtText, username } = req.body;
 
   User.findOne({ username })
@@ -41,3 +43,5 @@ app.post('/api/thoughts', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+module.exports = router;
